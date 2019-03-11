@@ -18,7 +18,8 @@ function loadAdmin() {
 //
 // ************************************
 function calcRound(round) {
-  if (round > 0)
+  if (round > 0) console.log('round');
+  
   return '<div>' + round + '</div>';
 }
 
