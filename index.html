@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SalaryCapMadness</title>
+    <link rel="icon" type="image/png" href="scmad2.png">
+    <link rel="stylesheet" media="screen" href="app.css">
+    <link href="https://fonts.googleapis.com/css?family=Passion+One|Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-firestore.js"></script>
+    <script src="polyfills.js"></script>
+    <script src="nav.js"></script>
+  </head>
+  <body>
+
+    <div id="loader">
+      <div class="modal">
+        <div id="loader-content" class="orange">
+          <i class="fas fa-basketball-ball"></i>
+        </div>
+        <div class="orange center">Loading</div>
+      </div>
+    </div>
+
+    <div id="header">
+      <span class="logo green">SalaryCap</span><span class="logo orange">Madness</span>
+      <div class="white smaller pointer right"><i class="fas fa-user-circle"></i><span id="user"></span></div>
+    </div>
+
+    <nav>
+      <div id="rules-nav" data-page="#rules" class="nav-item pointer">
+        <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
+        <div class="nav-label">RULES</div>
+      </div>
+      <!-- <div data-page="payment" class="nav-item pointer">
+        <div class="nav-icon"><i class="far fa-money-bill-alt"></i></div>
+        <div class="nav-label">PAYMENT</div>
+      </div> -->
+      <div id="home-nav" data-page="#home" class="nav-item pointer green">
+        <div class="nav-icon"><i class="fas fa-home"></i></div>
+        <div class="nav-label">HOME</div>
+      </div>
+      <div id="results-nav" data-page="#results" class="nav-item pointer hide">
+        <div class="nav-icon"><i class="fas fa-list-ol"></i></div>
+        <div class="nav-label">RESULTS</div>
+      </div>
+      <div id="picks-nav" data-page="#picks" class="nav-item pointer">
+        <div class="nav-icon"><i class="fas fa-play-circle"></i></div>
+        <div class="nav-label">ENTRIES</div>
+      </div>
+    </nav>
+
+    <div id="main">
+      <!-- <div id="menu" class="hide">
+        <div class="menu-item" onclick="showPage('rules')">
+          <div class="menu-icon"><i class="fas fa-info-circle"></i></div><div class="menu-label">Rules</div>
+        </div>
+        <div class="menu-item" onclick="showPage('picks')">
+          <div class="menu-icon"><i class="fas fa-play-circle"></i></div><div id="pick-label" class="menu-label">My Picks</div>
+        </div>
+        <div class="menu-item" onclick="showPage('results')">
+          <div class="menu-icon"><i class="fas fa-list-ol"></i></div><div class="menu-label">Results</div>
+        </div>
+        <div class="menu-item" onclick="showPage('payment')">
+          <div class="menu-icon"><i class="far fa-money-bill-alt"></i></div><div class="menu-label">Payment Info</div>
+        </div>
+        <div id="update" class="menu-item hide" onclick="showPage('update')">
+          <div class="menu-icon"><i class="fas fa-cog"></i></div><div class="menu-label">Update</div>
+        </div>
+        <div id="status" class="menu-item hide" onclick="changeStatus()">
+          <div class="menu-icon"><i class="fas fa-cog"></i></div><div id="stat" class="menu-label"></div>
+        </div> 
+        <div id="menu-users" class="menu-item hide" onclick="showPage('users')">
+          <div class="menu-icon"><i class="fas fa-user"></i></div><div class="menu-label">Users</div>
+        </div>
+      </div> -->
+
+      <div id="home" class="page">
+        <div class="contain">
+          <div>Welcome to <span class="logo green">SalaryCap</span><span class="logo orange">Madness</span></div>
+          <br>
+          <div>2019 Picks will be available after Selection Sunday</div>
+          <br>
+          <div>Click here to see the 2018 results</div>
+        </div>       
+      </div>
+
+      <div id="rules" class="page hide">
+        <div class="contain">
+            <div class="logo orange center">Rules</div>
+          <p><b>Object:</b>  Accumulate the most points.  Teams earn points for each game
+          they win multiplied by their bracket seed.</p>
+
+          <p><b>Scoring System:</b></p>
+          <table>
+          <tr><th>Advancing to<th>Points
+          <tr><td>2nd Round<td class="center">1
+          <tr><td>Sweet 16<td class="center">2
+          <tr><td>Elite 8<td class="center">4
+          <tr><td>Final 4<td class="center">8
+          <tr><td>Championship Game<td class="center">16
+          <tr><td>Winning it all<td class="center"s>32
+          </table>
+
+          <p><b>Scoring Multiplier:</b><br>
+          For each award of points it is multiplied by that team's bracket seed.<br>
+          <br>
+          Thus, if a "1" seeded team wins the tourney they would receive 1+2+4+8+16+32 for a total of 63 points.<br>
+          <br>
+          If a "12" seed advances to the sweet 16 they would receive 1*"12"+2*"12" for a total of 36 points.<br>
+          <br>
+          While a "5" seed advancing to the Elite 8 earns 1*"5"+2*"5"+4*"5" for 35 points.</p>
+
+
+          <p><b>Salary Cap and Team Costs:</b><br>
+          The cost for each team is determined by the following formula:  (17 minus the bracket seed).  Thus a "1" seed costs 16 (17-1).
+                  A "10" Seed would cost 7 (17-10) and a "16" seed costs 1 (17-16).<br>
+          <br>
+          The Total salary cap for your roster of teams is 90.  You may have 1 to 14 teams as long as the total salary doesn't exceed 90.<br>
+          <br>
+          Any unused portion of the salary cap, counts as points for your aggregate score.  Thus if you use only 76 for your salary, your starting points will be 14.<br>
+          </p>   
+        </div>
+      </div>
+
+      <div id="picks" class="page hide">
+        <div class="contain">
+          <div class="logo orange center">My Entries</div>
+          <div id="user-picks"></div>
+          <div id="add-entry" class="bg-green white pointer hide">
+            <i class="fas fa-plus-circle"></i> Add an entry
+          </div>
+        </div>
+      </div>
+
+      <div id="make-picks" class="page hide">
+        <div class="main-head">
+          <div class="dark">
+              <div id="make-picks-name" class="logo green center"></div>
+          </div>
+          <div class="dark flex-around wrap">
+            <div class="margin-v">Teams: <span id="make-picks-teams"></span></div>
+            <div class="margin-v">Left: $<span id="make-picks-left"></span></div>
+            <div class="flex-end">
+                <div id="make-picks-submit" class="btn bg-green white">Submit</div>
+                <div id="make-picks-cancel" class="btn bg-red white">Cancel</div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div id="teams" class="list hide">
+        <div class="flex-around wrap">
+          <div class="dark pick-region">
+            <div class="logo orange center">EAST</div>
+            <div id="teams-e" class="teams"></div>
+          </div>
+          <div class="dark pick-region">
+            <div class="logo orange center">SOUTH</div>
+            <div id="teams-s"></div>
+          </div>
+          <div class="dark pick-region">
+            <div class="logo orange center">WEST</div>
+            <div id="teams-w"></div>
+          </div>
+          <div class="dark pick-region">
+            <div class="logo orange center">MIDWEST</div>
+            <div id="teams-m"></div>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <div id="results" class="page list hide">
+
+      </div>
+
+      <div id="payment" class="page hide">
+        Please pay Aaron Carr.
+      </div>
+
+      <div id="update-teams" class="page list hide">
+        <div id="teams-yes"></div>
+        <div id="teams-no"></div>
+      </div>
+
+      <div id="user-names" class="page list hide">
+        <div id="user-num" style="padding-left: 10px"></div>
+        <div id="user-details" style="padding-left: 10px"></div>
+      </div>
+
+    <div id="log-in" class="modal hide">
+      <div class="modal-content dark">
+        <input type="text" id="log-in-email" class="log-in-text" placeholder="Email">
+        <input type="password" id="log-in-password" class="log-in-text" placeholder="Password">
+        <div class="smaller">Note - If you registered in 2018, you can use the same email and password.</div>
+        <p id="log-in-forgot" class="smaller green pointer">Forgot password?</p>
+        <div id="log-in-submit" class="btn bg-green white pointer">Log In</div>
+        <div id="register" class="hide">
+          <hr>
+          <input type="text" id="log-in-fname" class="log-in-text" placeholder="First Name">
+          <input type="text" id="log-in-lname" class="log-in-text" placeholder="Last Name">
+        </div>
+        <div id="log-in-register" class="btn bg-green white pointer">Register</div>
+        <div id="log-in-cancel" class="btn bg-red white pointer">Cancel</div>
+      </div>
+    </div>
+
+    <div id="msg-box" class="modal hide">
+      <div class="modal-content dark">
+        <div id="msg-box-text"></div>
+        <div class="contain flex-around pointer">
+          <div id="msg-box-ok" class="btn bg-green white">OK</div>
+          <div id="msg-box-can" class="btn bg-red white">CANCEL</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-box" class="modal hide">
+        <div class="modal-content dark red">
+          <div id="error-box-text" class="center"></div>
+          <div class="flex-around pointer">
+              <div id="error-box-ok" class="btn bg-red white">OK</div>
+          </div>
+        </div>
+    </div> 
+
+    <div id="entry-name" class="modal hide">
+        <div class="modal-content dark">
+          <div id="entry-name-error" class="red smaller hide"></div>
+          <div>Entry Name:</div>
+          <div><input id="entry-name-text" type="text"></div>
+          <div class="smaller">** Entry names do not need to be unique.</div>
+          <div class="flex-around">
+            <div id="entry-name-ok" class="btn bg-green white">OK</div>
+          </div>
+        </div>
+    </div>
+
+    <div id="user-menu" class="dark hide">
+        <div id="user-menu-update" class="contain hide"><i class="fas fa-cog"></i> Updates</div>
+        <div id="user-menu-logout" class="contain"><i class="fas fa-sign-out-alt"></i> Log Out</div>
+      </div>
+
+
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
+    <script src="entry.js"></script>
+    <script src="user.js"></script>
+    <script src="msgbox.js"></script>
+    <!-- <script src="test.js"></script> -->
+    
+
+  </body>
+</html>

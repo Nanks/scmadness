@@ -1,0 +1,514 @@
+const impTeam =  {
+  "S1": {
+    "region" : "S",
+    "name" : "Virginia",
+    "seed" : 1,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S16": {
+    "region" : "S",
+    "name" : "Maryland (BC)",
+    "seed" : 16,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S8": {
+    "region" : "S",
+    "name" : "Creighton",
+    "seed" : 8,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S9": {
+    "region" : "S",
+    "name" : "Kansas State",
+    "seed" : 9,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S5": {
+    "region" : "S",
+    "name" : "Kentucky",
+    "seed" : 5,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S12": {
+    "region" : "S",
+    "name" : "Davidson",
+    "seed" : 12,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S4": {
+    "region" : "S",
+    "name" : "Arizona",
+    "seed" : 4,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S13": {
+    "region" : "S",
+    "name" : "Buffalo",
+    "seed" : 13,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S6": {
+    "region" : "S",
+    "name" : "Miami (FL)",
+    "seed" : 6,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S11": {
+    "region" : "S",
+    "name" : "Loyola (IL)",
+    "seed" : 11,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S3": {
+    "region" : "S",
+    "name" : "Tennessee",
+    "seed" : 3,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S14": {
+    "region" : "S",
+    "name" : "Wright State",
+    "seed" : 14,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S7": {
+    "region" : "S",
+    "name" : "Nevada",
+    "seed" : 7,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S10": {
+    "region" : "S",
+    "name" : "Texas",
+    "seed" : 10,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S2": {
+    "region" : "S",
+    "name" : "Cincinnati",
+    "seed" : 2,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "S15": {
+    "region" : "S",
+    "name" : "Georgia State",
+    "seed" : 15,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E1": {
+    "region" : "S",
+    "name" : "Villanova",
+    "seed" : 1,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E16": {
+    "region" : "S",
+    "name" : "LIU Brooklyn/Radford",
+    "seed" : 16,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E8": {
+    "region" : "S",
+    "name" : "Virginia Tech",
+    "seed" : 8,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E9": {
+    "region" : "S",
+    "name" : "Alabama",
+    "seed" : 9,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E5": {
+    "region" : "S",
+    "name" : "West Virginia",
+    "seed" : 5,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E12": {
+    "region" : "S",
+    "name" : "Murray State",
+    "seed" : 12,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E4": {
+    "region" : "S",
+    "name" : "Wichita State",
+    "seed" : 4,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E13": {
+    "region" : "S",
+    "name" : "Marshall",
+    "seed" : 13,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E6": {
+    "region" : "S",
+    "name" : "Florida",
+    "seed" : 6,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E11": {
+    "region" : "S",
+    "name" : "St Bonaventure/UCLA",
+    "seed" : 11,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E3": {
+    "region" : "S",
+    "name" : "Texas Tech",
+    "seed" : 3,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E14": {
+    "region" : "S",
+    "name" : "Stephen F Austin",
+    "seed" : 14,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E7": {
+    "region" : "S",
+    "name" : "Arkansas",
+    "seed" : 7,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E10": {
+    "region" : "S",
+    "name" : "Butler",
+    "seed" : 10,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E2": {
+    "region" : "S",
+    "name" : "Purdue",
+    "seed" : 2,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "E15": {
+    "region" : "S",
+    "name" : "Cal St Fullerton",
+    "seed" : 15,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M1": {
+    "region" : "S",
+    "name" : "Kansas",
+    "seed" : 1,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M16": {
+    "region" : "S",
+    "name" : "Pennsylvania",
+    "seed" : 16,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M8": {
+    "region" : "S",
+    "name" : "Seton Hall",
+    "seed" : 8,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M9": {
+    "region" : "S",
+    "name" : "North Carolina State",
+    "seed" : 9,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M5": {
+    "region" : "S",
+    "name" : "Clemson",
+    "seed" : 5,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M12": {
+    "region" : "S",
+    "name" : "New Mexico State",
+    "seed" : 12,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M4": {
+    "region" : "S",
+    "name" : "Auburn",
+    "seed" : 4,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M13": {
+    "region" : "S",
+    "name" : "Coll of Charleston",
+    "seed" : 13,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M6": {
+    "region" : "S",
+    "name" : "TCU",
+    "seed" : 6,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M11": {
+    "region" : "S",
+    "name" : "Arizona St/Syracuse",
+    "seed" : 11,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M3": {
+    "region" : "S",
+    "name" : "Michigan State",
+    "seed" : 3,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M14": {
+    "region" : "S",
+    "name" : "Bucknell",
+    "seed" : 14,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M7": {
+    "region" : "S",
+    "name" : "Rhode Island",
+    "seed" : 7,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M10": {
+    "region" : "S",
+    "name" : "Oklahoma",
+    "seed" : 10,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M2": {
+    "region" : "S",
+    "name" : "Duke",
+    "seed" : 2,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "M15": {
+    "region" : "S",
+    "name" : "Iona",
+    "seed" : 15,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W1": {
+    "region" : "S",
+    "name" : "Xavier",
+    "seed" : 1,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W16": {
+    "region" : "S",
+    "name" : "North Car Central/Texas So",
+    "seed" : 16,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W8": {
+    "region" : "S",
+    "name" : "Missouri",
+    "seed" : 8,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W9": {
+    "region" : "S",
+    "name" : "Florida State",
+    "seed" : 9,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W5": {
+    "region" : "S",
+    "name" : "Ohio State",
+    "seed" : 5,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W12": {
+    "region" : "S",
+    "name" : "South Dakota State",
+    "seed" : 12,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W4": {
+    "region" : "S",
+    "name" : "Gonzaga",
+    "seed" : 4,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W13": {
+    "region" : "S",
+    "name" : "UNC-Greensboro",
+    "seed" : 13,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W6": {
+    "region" : "S",
+    "name" : "Houston",
+    "seed" : 6,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W11": {
+    "region" : "S",
+    "name" : "San Diego State",
+    "seed" : 11,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W3": {
+    "region" : "S",
+    "name" : "Michigan",
+    "seed" : 3,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W14": {
+    "region" : "S",
+    "name" : "Montana",
+    "seed" : 14,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W7": {
+    "region" : "S",
+    "name" : "Texas A&M",
+    "seed" : 7,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W10": {
+    "region" : "S",
+    "name" : "Providence",
+    "seed" : 10,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W2": {
+    "region" : "S",
+    "name" : "North Carolina",
+    "seed" : 2,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  },
+  "W15": {
+    "region" : "S",
+    "name" : "Lipscomb",
+    "seed" : 15,
+    "elim" : "N",
+    "total" : 0,
+    "round" : 0
+  }
+}
