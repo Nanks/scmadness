@@ -8,13 +8,14 @@
     <link rel="stylesheet" media="screen" href="app.css">
     <link href="https://fonts.googleapis.com/css?family=Passion+One|Roboto" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-firestore.js"></script>
-    <script src="polyfills.js"></script>
-    <script src="nav.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-functions.js"></script>
+    <script defer src="polyfills.js"></script>
+    <script defer src="nav.js"></script>
   </head>
   <body>
 
@@ -33,6 +34,10 @@
     </div>
 
     <nav>
+      <div id="home-nav" data-page="#home" class="nav-item pointer green">
+        <div class="nav-icon"><i class="fas fa-home"></i></div>
+        <div class="nav-label">HOME</div>
+      </div>
       <div id="rules-nav" data-page="#rules" class="nav-item pointer">
         <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
         <div class="nav-label">RULES</div>
@@ -41,17 +46,13 @@
         <div class="nav-icon"><i class="far fa-money-bill-alt"></i></div>
         <div class="nav-label">PAYMENT</div>
       </div> -->
-      <div id="home-nav" data-page="#home" class="nav-item pointer green">
-        <div class="nav-icon"><i class="fas fa-home"></i></div>
-        <div class="nav-label">HOME</div>
+      <div id="picks-nav" data-page="#picks" class="nav-item pointer">
+        <div class="nav-icon"><i class="fas fa-play-circle"></i></div>
+        <div class="nav-label">ENTRIES</div>
       </div>
       <div id="results-nav" data-page="#results" class="nav-item pointer hide">
         <div class="nav-icon"><i class="fas fa-list-ol"></i></div>
         <div class="nav-label">RESULTS</div>
-      </div>
-      <div id="picks-nav" data-page="#picks" class="nav-item pointer">
-        <div class="nav-icon"><i class="fas fa-play-circle"></i></div>
-        <div class="nav-label">ENTRIES</div>
       </div>
     </nav>
 
@@ -249,12 +250,11 @@
       </div>
 
 
-    <script src="firebase.js"></script>
-    <script src="app.js"></script>
-    <script src="entry.js"></script>
-    <script src="user.js"></script>
-    <script src="msgbox.js"></script>
-    <!-- <script src="test.js"></script> -->
+    <script defer src="firebase.js"></script>
+    <script defer src="app.js"></script>
+    <script defer src="entry.js"></script>
+    <script defer src="user.js"></script>
+    <script defer src="msgbox.js"></script>
     
 
   </body>

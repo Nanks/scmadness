@@ -9,63 +9,26 @@ firebase.initializeApp(config);
 
 const fb = firebase.database();
 const fs = firebase.firestore();
+const fn = firebase.functions();
 const userRef = fs.collection('users');
 // var entryRef = fs.collection('entries19');
 const entryRef = fs.collection('test');
 const teamRef = fs.collection('teams19');
 const statusRef = fs.collection('status').doc('2019');
-const admins = ['8OpPRiDdchTdY4XuA6rUWmdrmsH2','3Lnd7YgXcbbUCtXh9wUg0bPxDgS2']
 
-statusRef.onSnapshot(function(status) {
-  $('#results').empty();
-  $('#picks-nav').show();
-  $('#results-nav').hide();
-  showPage('#home');
-  if (status.data().status > 1) {
-    $('#picks-nav').hide();
-    $('#results-nav').show();
-    loadResults();
-    showPage('#results');
-  }
-});
-
-// entryRef.onSnapshot(function() {
-//   console.log('entry change');
-  
-//   statusRef.get().then(function(s) {
-//     loadEntries(s.data().status);
-//   });
+// statusRef.onSnapshot(function(status) {
+//   loadResults(status.data().status);
 // });
+
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    if (admins.indexOf(user.uid) >= 0) {
-      console.log('admin');
-      loadAdmin();
-    }
-    
-    if (firebase.auth().currentUser.displayName) {
-      $('#user').text(firebase.auth().currentUser.displayName.split(',')[1]);
-    } else {
-      $('#user').text('User');
-      checkUserDoc();
-    }
-    appInit();
+    user.getIdTokenResult().then(idTokenResult => {
+      user.admin = idTokenResult.claims.admin;
+      setupUI(user);
+    });
+    loadResults(); 
   } else {
-    $('#user').text('Log In');
-    resetLogin();
-    $('#user-picks').empty();
-    showPage('#home');
-    $('#loader').hide();
+    setupUI();
   }
 });
-
-function checkUserDoc() {
-  userRef.doc(firebase.auth().currentUser.uid).get().then(function(user) {
-    if (user.exists) {
-      firebase.auth().currentUser.updateProfile({ displayName: user.data().lname + "," + user.data().fname }).then(function () {
-        $('#user').text(firebase.auth().currentUser.displayName.split(',')[1]);
-      });
-    }
-  });
-}

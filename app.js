@@ -2,14 +2,60 @@ let currentEntry;
 
 {
 
-function appInit() {
-  console.log('app init');
-  loadMyEntries();
-};
+function setupUI(user) {
+  if (user) {
+    userRef.doc(user.uid).get().then(function (user) {
+      if (user.exists) {
+        $('#user').text(user.data().fname);
+      }
+    });
+  } else {
+    $('#user').text('Log In');
+    $('#user-picks').empty();
+    $('#loader').hide();
+  }  
+}
 
-function loadAdmin() {
-  console.log('load admin');
-  
+function loadResults() {
+  $('#results-nav').hide();
+  $('#loader').show();
+  statusRef.get().then(function(s) {
+    const status = s.data().status
+    console.log('load status', status);
+    if (firebase.auth().currentUser) {
+      loadMyEntries(status)
+    }
+    if (status > 1) {
+      entryRef.orderBy('total', 'desc').get().then  (function (results) {
+        results.forEach(function (result) {
+          var temp = renderEntry(result);
+          temp.then(function (result) {
+            $('#results').append(result);
+          });
+        });
+        $('#results-nav').show();
+      });
+    }
+    $('#loader').hide();
+  });
+}
+
+function loadMyEntries(status) {
+  $('#loader').show();
+  $('#add-entry').hide();
+  $('#user-picks').empty();
+  entryRef.where('userKey', '==', firebase.auth().currentUser.uid).orderBy('total', 'desc').get().then(function (entries) {
+    entries.forEach(function (entry) {
+      var temp = renderEntry(entry, 'my', status);
+      temp.then(function (entry) {
+        $('#user-picks').append(entry);
+      });
+    });
+    if (entries.size < 3) {
+      $('#add-entry').show();
+    };
+    $('#loader').hide();
+  });
 }
 
 // ************************************
@@ -18,7 +64,10 @@ function loadAdmin() {
 //
 // ************************************
 function calcRound(round) {
-  if (round > 0) console.log('round');
+  for (var i = 1; i <= round; i *= 2) {
+    // console.log(i);
+    
+  }
   
   return '<div>' + round + '</div>';
 }
@@ -97,15 +146,12 @@ function loadTeams(status) {
 }
 
 
-
-
-
 // ************************************
 //
 // ENTRY LIST FUNCTIONS
 //
 // ************************************
-function renderEntry(entry, type) {
+function renderEntry(entry, type, status) {
   return new Promise(function(resolve, reject) {
     teamRef.get().then(function(teams) {
       var tms = {};
@@ -126,7 +172,7 @@ function renderEntry(entry, type) {
         temp += '<div class="team smaller' + elim + '">' + t.seed + ' - ' + t.name + ' - ' + t.total + '</div>';
       });
       temp += '</div>';
-      if (type == 'my') {
+      if (type == 'my' && status < 2) {
         temp += '<div class="entry-edit-buttons flex-end">';
         var id = "'" + entry.id + "'";
         temp += '<div class="btn bg-red white" onclick="deleteEntry(' + id + ')">Delete</div>';
@@ -140,34 +186,7 @@ function renderEntry(entry, type) {
   });
 }
 
-function loadMyEntries() {
-  $('#loader').show();
-  $('#add-entry').hide();
-  $('#user-picks').empty();
-  entryRef.where('userKey', '==', firebase.auth().currentUser.uid).orderBy('total', 'desc').get().then(function(entries) {
-    entries.forEach(function(entry) {
-      var temp = renderEntry(entry, 'my');
-      temp.then(function(entry) {
-        $('#user-picks').append(entry);
-      });
-    });
-    if (entries.size < 3) {
-      $('#add-entry').show();
-    };
-    $('#loader').hide();
-  });
-}
 
-function loadResults() {
-  entryRef.orderBy('total', 'desc').get().then(function(results) {
-    results.forEach(function(result) {
-      var temp = renderEntry(result);
-      temp.then(function(result) {
-        $('#results').append(result);
-      })
-    })
-  })
-}
 
 
 // old

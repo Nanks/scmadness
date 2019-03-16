@@ -69,9 +69,10 @@ $('#log-in-register').click(function(e) {
 		if (emailPassValid && namesValid) {
 			firebase.auth().createUserWithEmailAndPassword($('#log-in-email').val(), $('#log-in-password').val())
 				.then(function(e) {
-					e.user.updateProfile({displayName: $('#log-in-lname').val() + "," + $('#log-in-fname').val()}).then(function(e) {
-						$('#user').text(firebase.auth().currentUser.displayName.split(',')[1]);
-					});
+					return userRef.doc(e.user.uid).set({lname: $('#log-in-lname').val(), fname: $('#log-in-fname').val()})	
+				})
+				.then(function () {
+					$('#user').text($('#log-in-fname').val());
 					console.log('User created successfully');
 					$('#log-in').hide();
 				})

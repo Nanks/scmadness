@@ -25,4 +25,9 @@
             
         });
     });
+
+    const addAdminRole = fn.httpsCallable('addAdminRole');
+    addAdminRole('ta_carr@yahoo.com').then(result => {
+        console.log(result);
+    });
 }

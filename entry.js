@@ -82,7 +82,10 @@ function submitEntry(key) {
     });
   } 
   currentEntry = undefined;
-  loadMyEntries();
+  statusRef.get().then(function(s) {
+    loadMyEntries(s.data().status);
+  });
+  
 }
 
 function editEntry(key) {
@@ -105,7 +108,9 @@ function deleteEntry(key) {
     function (key) {
       entryRef.doc(key).delete().then(function(e) {
         console.log('Entry deleted');
-        loadMyEntries();
+        statusRef.get().then(function (s) {
+          loadMyEntries(s.data().status);
+        });
       }).catch(function (e) {
         console.log('Error deleting entry' + e.message)
       });
