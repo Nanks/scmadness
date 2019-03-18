@@ -1,5 +1,6 @@
 function dialog(message, key, yesCallback, noCallback) {
 	console.log('msgbox');
+	$('#loader').hide();
 	$('#msg-box-text').html(message);
 	$('#msg-box').show();
 
@@ -15,6 +16,7 @@ function dialog(message, key, yesCallback, noCallback) {
 }
 
 function showErrorBox(text) {
+	$('#loader').hide();
 	$('#error-box-text').html(text);
 	$('#error-box').show();
 
@@ -22,3 +24,9 @@ function showErrorBox(text) {
 		$('#error-box').hide();
 	});
 }
+
+$('.modal').click(function(e) {
+	if (e.target.classList.contains('modal')) {
+		$('.modal').hide();
+	}
+});

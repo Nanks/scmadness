@@ -11,23 +11,33 @@ const fb = firebase.database();
 const fs = firebase.firestore();
 const fn = firebase.functions();
 const userRef = fs.collection('users');
-// var entryRef = fs.collection('entries19');
-const entryRef = fs.collection('test');
+const entryRef = fs.collection('entries19');
+// const entryRef = fs.collection('test');
 const teamRef = fs.collection('teams19');
 const statusRef = fs.collection('status').doc('2019');
 
-// statusRef.onSnapshot(function(status) {
-//   loadResults(status.data().status);
-// });
+teamRef.onSnapshot(function() {
+  statusRef.get().then(function(s) {
+    if(s.data().status > 1) {
+      loadResults();
+      console.log('teamRef');
+    }
+  });
+});
 
 
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    user.getIdTokenResult().then(idTokenResult => {
+    user.getIdTokenResult().then(function(idTokenResult) {
       user.admin = idTokenResult.claims.admin;
       setupUI(user);
     });
-    loadResults(); 
+    statusRef.get().then(function (s) {
+      if (s.data().status < 2) {
+        console.log('authRef');
+        loadResults(); 
+      }
+    });
   } else {
     setupUI();
   }

@@ -83,11 +83,10 @@
 
       <div id="home" class="page">
         <div class="contain">
-          <div>Welcome to <span class="logo green">SalaryCap</span><span class="logo orange">Madness</span></div>
-          <br>
-          <div>2019 Picks will be available after Selection Sunday</div>
-          <br>
-          <div>Click here to see the 2018 results</div>
+          <p>Welcome to <span class="logo green">SalaryCap</span><span class="logo orange">Madness</span></p>
+          <p>2019 picks are now available.</p>
+          <p>Click on the menu to see the rules or see/create entries.</p>
+          <p id="home-ie" class='smaller'>** For the best experience, do not use Internet Explorer</p>
         </div>       
       </div>
 
@@ -178,8 +177,11 @@
 
       
 
-      <div id="results" class="page list hide">
-
+      <div id="results" class="page hide">
+        <div class="contain">
+          <div class="logo orange center">Results</div>
+          <div id="results-list" class="list"></div>
+        </div>
       </div>
 
       <div id="payment" class="page hide">
@@ -198,24 +200,27 @@
 
     <div id="log-in" class="modal hide">
       <div class="modal-content dark">
-        <input type="text" id="log-in-email" class="log-in-text" placeholder="Email">
-        <input type="password" id="log-in-password" class="log-in-text" placeholder="Password">
-        <div class="smaller">Note - If you registered in 2018, you can use the same email and password.</div>
-        <p id="log-in-forgot" class="smaller green pointer">Forgot password?</p>
-        <div id="log-in-submit" class="btn bg-green white pointer">Log In</div>
-        <div id="register" class="hide">
+        <form id="log-in-form" action="submit">
+          <input type="email" id="log-in-email" class="log-in-text" placeholder="Email">
+          <input type="password" id="log-in-password" class="log-in-text" placeholder="Password">
+          <div class="smaller">Note - If you registered in 2018, you can use the same email and password.</div>
+          <p id="log-in-forgot" class="smaller green under pointer">Forgot password?</p>
+          <button type="submit" id="log-in-submit" class="btn bg-green white pointer">Log In </button>
+          <p id="log-in-new-user" class="smaller green under pointer">New user?</p>
+        </form>
+        <form id="register-form" action="submit" class="hide">
           <hr>
           <input type="text" id="log-in-fname" class="log-in-text" placeholder="First Name">
           <input type="text" id="log-in-lname" class="log-in-text" placeholder="Last Name">
-        </div>
-        <div id="log-in-register" class="btn bg-green white pointer">Register</div>
-        <div id="log-in-cancel" class="btn bg-red white pointer">Cancel</div>
+          <button type="submit" id="log-in-register" class="btn bg-green white pointer">Register</div>
+        </form>
+        <!-- <div id="log-in-cancel" class="btn bg-red white pointer">Cancel</div> -->
       </div>
     </div>
 
     <div id="msg-box" class="modal hide">
       <div class="modal-content dark">
-        <div id="msg-box-text"></div>
+        <div id="msg-box-text" class="center"></div>
         <div class="contain flex-around pointer">
           <div id="msg-box-ok" class="btn bg-green white">OK</div>
           <div id="msg-box-can" class="btn bg-red white">CANCEL</div>

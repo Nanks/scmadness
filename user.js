@@ -44,44 +44,43 @@ $('#user').click(function(e) {
 	}
 });
 
-$('#log-in-submit').click(function(e) {
+$('#log-in-form').submit(function(e) {
+	e.preventDefault()
 	if (checkEmailPassword()) {
 		firebase.auth().signInWithEmailAndPassword($('#log-in-email').val(), $('#log-in-password').val())
 			.then(function(e) {
 				console.log('Login successful');
 				$('#log-in').hide();
+				$('#log-in-form').trigger('reset');
+				$('#register-form').trigger('reset');
 			})
 			.catch(function(e) {
 				showErrorBox(e.message);
 			});
 	}
 });
-  
-$('#log-in-register').click(function(e) {
+
+$('#log-in-new-user').click(function(e) {
+	$('#register-form').show();
+}); 
 	
-	if ($('#register').css('display') == 'none') {
-		$('#register').show();
-	} else {
-
-		let emailPassValid = checkEmailPassword();
-		let namesValid = checkNames();
-		
-		if (emailPassValid && namesValid) {
-			firebase.auth().createUserWithEmailAndPassword($('#log-in-email').val(), $('#log-in-password').val())
-				.then(function(e) {
-					return userRef.doc(e.user.uid).set({lname: $('#log-in-lname').val(), fname: $('#log-in-fname').val()})	
-				})
-				.then(function () {
-					$('#user').text($('#log-in-fname').val());
-					console.log('User created successfully');
-					$('#log-in').hide();
-				})
-				.catch(function(e) {
-					showErrorBox(e.message);
-				});
-		}
+$('#register-form').submit(function(e) {
+	e.preventDefault();
+	if (checkEmailPassword() && checkNames()) {
+		firebase.auth().createUserWithEmailAndPassword($('#log-in-email').val(), $('#log-in-password').val())
+			.then(function(e) {
+				return userRef.doc(e.user.uid).set({lname: $('#log-in-lname').val(), fname: $('#log-in-fname').val()})	
+			})
+			.then(function () {
+				$('#user').text($('#log-in-fname').val());
+				console.log('User created successfully');
+				$('form').trigger('reset');
+				$('#log-in').hide();
+			})
+			.catch(function(e) {
+				showErrorBox(e.message);
+			});
 	}
-
 });
 	
 $('#log-in-forgot').click(function(e) {
@@ -94,11 +93,6 @@ $('#log-in-forgot').click(function(e) {
 			showErrorBox(e.message);
 		});
 	}
-});
-
-$('#log-in-cancel').click(function() {
-	$('#log-in').hide();
-	console.log('Cancel clicked');
 });
 
 }

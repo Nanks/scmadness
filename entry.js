@@ -59,6 +59,7 @@ function createEntry(name) {
 }
 
 function submitEntry(key) {
+  $('#loader').show();
   let entry = {
     entryName: currentEntry.entryName,
     teams: currentEntry.teams,
@@ -106,12 +107,14 @@ function deleteEntry(key) {
   dialog('Are you sure you want to delete this entry?',
     key,
     function (key) {
+      $('#loader').show();
       entryRef.doc(key).delete().then(function(e) {
         console.log('Entry deleted');
         statusRef.get().then(function (s) {
           loadMyEntries(s.data().status);
         });
       }).catch(function (e) {
+        $('#loader').hide();
         console.log('Error deleting entry' + e.message)
       });
     },

@@ -12,16 +12,16 @@ function setupUI(user) {
   } else {
     $('#user').text('Log In');
     $('#user-picks').empty();
+    $('#add-entry').show();
     $('#loader').hide();
   }  
 }
 
 function loadResults() {
-  $('#results-nav').hide();
   $('#loader').show();
   statusRef.get().then(function(s) {
+    $('#results-list').empty();
     const status = s.data().status
-    console.log('load status', status);
     if (firebase.auth().currentUser) {
       loadMyEntries(status)
     }
@@ -30,10 +30,9 @@ function loadResults() {
         results.forEach(function (result) {
           var temp = renderEntry(result);
           temp.then(function (result) {
-            $('#results').append(result);
+            $('#results-list').append(result);
           });
         });
-        $('#results-nav').show();
       });
     }
     $('#loader').hide();
@@ -43,8 +42,10 @@ function loadResults() {
 function loadMyEntries(status) {
   $('#loader').show();
   $('#add-entry').hide();
-  $('#user-picks').empty();
+  console.log('user empty');
+  
   entryRef.where('userKey', '==', firebase.auth().currentUser.uid).orderBy('total', 'desc').get().then(function (entries) {
+    $('#user-picks').empty();
     entries.forEach(function (entry) {
       var temp = renderEntry(entry, 'my', status);
       temp.then(function (entry) {
