@@ -42,10 +42,6 @@
         <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
         <div class="nav-label">RULES</div>
       </div>
-      <!-- <div data-page="payment" class="nav-item pointer">
-        <div class="nav-icon"><i class="far fa-money-bill-alt"></i></div>
-        <div class="nav-label">PAYMENT</div>
-      </div> -->
       <div id="picks-nav" data-page="#picks" class="nav-item pointer">
         <div class="nav-icon"><i class="fas fa-play-circle"></i></div>
         <div class="nav-label">ENTRIES</div>
@@ -54,32 +50,13 @@
         <div class="nav-icon"><i class="fas fa-list-ol"></i></div>
         <div class="nav-label">RESULTS</div>
       </div>
+      <div id="admin-menu-nav" data-page="#admin-menu" class="nav-item pointer hide">
+        <div class="nav-icon"><i class="fas fa-cog"></i></div>
+        <div class="nav-label">ADMIN</div>
+      </div>
     </nav>
 
     <div id="main">
-      <!-- <div id="menu" class="hide">
-        <div class="menu-item" onclick="showPage('rules')">
-          <div class="menu-icon"><i class="fas fa-info-circle"></i></div><div class="menu-label">Rules</div>
-        </div>
-        <div class="menu-item" onclick="showPage('picks')">
-          <div class="menu-icon"><i class="fas fa-play-circle"></i></div><div id="pick-label" class="menu-label">My Picks</div>
-        </div>
-        <div class="menu-item" onclick="showPage('results')">
-          <div class="menu-icon"><i class="fas fa-list-ol"></i></div><div class="menu-label">Results</div>
-        </div>
-        <div class="menu-item" onclick="showPage('payment')">
-          <div class="menu-icon"><i class="far fa-money-bill-alt"></i></div><div class="menu-label">Payment Info</div>
-        </div>
-        <div id="update" class="menu-item hide" onclick="showPage('update')">
-          <div class="menu-icon"><i class="fas fa-cog"></i></div><div class="menu-label">Update</div>
-        </div>
-        <div id="status" class="menu-item hide" onclick="changeStatus()">
-          <div class="menu-icon"><i class="fas fa-cog"></i></div><div id="stat" class="menu-label"></div>
-        </div> 
-        <div id="menu-users" class="menu-item hide" onclick="showPage('users')">
-          <div class="menu-icon"><i class="fas fa-user"></i></div><div class="menu-label">Users</div>
-        </div>
-      </div> -->
 
       <div id="home" class="page">
         <div class="contain">
@@ -184,18 +161,32 @@
         </div>
       </div>
 
+      <div id="admin-menu" class="page hide">
+        <div id="admin-menu-status" class="pointer">Status</div>
+        <div id="admin-menu-entries" class="pointer">Entries</div>
+        <div id="admin-menu-teams" class="pointer">Teams</div>
+      </div>
+
       <div id="payment" class="page hide">
         Please pay Aaron Carr.
       </div>
 
-      <div id="update-teams" class="page list hide">
-        <div id="teams-yes"></div>
-        <div id="teams-no"></div>
+      <div id="admin-status" class="page hide">
+        <div class="flex-around contain large">Status: 
+          <span id="admin-status-minus"><i class="fas fa-minus-square"></i></span>
+          <span id="admin-status-status">1</span>
+          <span id="admin-status-plus"><i class="fas fa-plus-square"></i></span>
+        </div>
       </div>
 
-      <div id="user-names" class="page list hide">
-        <div id="user-num" style="padding-left: 10px"></div>
-        <div id="user-details" style="padding-left: 10px"></div>
+      <div id="admin-teams" class="page list hide">
+        <div id="admin-teams-no"></div>
+        <div id="admin-teams-yes"></div>
+      </div>
+
+      <div id="admin-user-names" class="page list hide">
+        <div id="admin-user-num" style="padding-left: 10px"></div>
+        <div id="admin-user-details" style="padding-left: 10px"></div>
       </div>
 
     <div id="log-in" class="modal hide">
@@ -249,17 +240,13 @@
         </div>
     </div>
 
-    <div id="user-menu" class="dark hide">
-        <div id="user-menu-update" class="contain hide"><i class="fas fa-cog"></i> Updates</div>
-        <div id="user-menu-logout" class="contain"><i class="fas fa-sign-out-alt"></i> Log Out</div>
-      </div>
-
 
     <script defer src="firebase.js"></script>
     <script defer src="app.js"></script>
     <script defer src="entry.js"></script>
     <script defer src="user.js"></script>
     <script defer src="msgbox.js"></script>
+    <script defer src="admin.js"></script>
     
 
   </body>

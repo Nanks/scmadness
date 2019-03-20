@@ -9,10 +9,12 @@ function setupUI(user) {
         $('#user').text(user.data().fname);
       }
     });
+    if (user.admin) $('#admin-menu-nav').show();
   } else {
     $('#user').text('Log In');
     $('#user-picks').empty();
     $('#add-entry').show();
+    $('#admin-menu-nav').hide()
     $('#loader').hide();
   }  
 }
@@ -42,7 +44,6 @@ function loadResults() {
 function loadMyEntries(status) {
   $('#loader').show();
   $('#add-entry').hide();
-  console.log('user empty');
   
   entryRef.where('userKey', '==', firebase.auth().currentUser.uid).orderBy('total', 'desc').get().then(function (entries) {
     $('#user-picks').empty();
@@ -56,6 +57,34 @@ function loadMyEntries(status) {
       $('#add-entry').show();
     };
     $('#loader').hide();
+  });
+}
+
+function updateEntries() {
+  let teams = teamRef.get().then(function (teams) {
+    var tms = {};
+    teams.forEach(function (team) {
+      tms[team.id] = team.data();
+    });
+    return (tms);
+  });
+  teams.then(function (teams) {
+    return entryRef.get().then(function (entries) {
+      entries.forEach(function (entry) {
+        let t = entry.data().left;
+        entry.data().teams.forEach(function (tid) {
+          t += teams[tid].total;
+        });
+        entryRef.doc(entry.id).update({ total: t });
+      });
+    });
+  }).then(function () {
+    statusRef.get().then(function (s) {
+      if (s.data().status > 1) {
+        loadResults();
+        console.log('teamRef');
+      }
+    });
   });
 }
 
@@ -186,6 +215,7 @@ function renderEntry(entry, type, status) {
     });
   });
 }
+
 
 
 

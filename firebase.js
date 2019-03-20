@@ -17,12 +17,7 @@ const teamRef = fs.collection('teams19');
 const statusRef = fs.collection('status').doc('2019');
 
 teamRef.onSnapshot(function() {
-  statusRef.get().then(function(s) {
-    if(s.data().status > 1) {
-      loadResults();
-      console.log('teamRef');
-    }
-  });
+  updateEntries();
 });
 
 
