@@ -28,7 +28,7 @@ function loadResults() {
       loadMyEntries(status)
     }
     if (status > 1) {
-      entryRef.orderBy('total', 'desc').get().then  (function (results) {
+      entryRef.orderBy('total', 'desc').get().then(function (results) {
         results.forEach(function (result) {
           var temp = renderEntry(result);
           temp.then(function (result) {

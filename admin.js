@@ -43,12 +43,23 @@ function updateStatus(s) {
 // ************************************
 $('#admin-menu-entries').click(function(e) {
 	renderAdminEntries().then(function() {
-		showPage('#admin-entries');
+		showPage('#admin-user-names');
+		;
 	});  
 });
 
 function renderAdminEntries() {
 	console.log('admin entries');
+	$('#loader').show();
+	$('#admin-user-details').empty();
+	return entryRef.get().then(function(entries) {
+		entries.forEach(function(entry) {
+			userRef.doc(entry.data().userKey).get().then(function(user) {
+				$('#admin-user-details').append('<div>' + entry.data().entryName + ' - ' + user.data().fname + ' ' +user.data().lname + '</div>');
+			})
+		});
+		$('#loader').hide()
+	});
 }
 
 // ************************************
