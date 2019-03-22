@@ -13,7 +13,7 @@ function setupUI(user) {
   } else {
     $('#user').text('Log In');
     $('#user-picks').empty();
-    $('#add-entry').show();
+    // $('#add-entry').show();
     $('#admin-menu-nav').hide()
     $('#loader').hide();
   }  

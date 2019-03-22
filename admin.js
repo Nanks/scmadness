@@ -53,6 +53,7 @@ function renderAdminEntries() {
 	$('#loader').show();
 	$('#admin-user-details').empty();
 	return entryRef.get().then(function(entries) {
+		$('#admin-user-num').text(entries.size);
 		entries.forEach(function(entry) {
 			userRef.doc(entry.data().userKey).get().then(function(user) {
 				$('#admin-user-details').append('<div>' + entry.data().entryName + ' - ' + user.data().fname + ' ' +user.data().lname + '</div>');
@@ -100,11 +101,11 @@ function renderAdminTeams() {
 			console.log(e.currentTarget.dataset.key)
 			$('#loader').show();
 			teamRef.doc(e.currentTarget.dataset.key).get().then(function (elim) {
-				let e = 'N';
+				let el = 'N';
 				if (elim.data().elim == 'N') {
-					e = 'Y';
+					el = 'Y';
 				}
-				teamRef.doc(e.currentTarget.dataset.key).update({ elim: e })
+				teamRef.doc(e.currentTarget.dataset.key).update({ elim: el })
 					.then(function () {
 						renderAdminTeams().then(function() {
 							$('#loader').hide();
